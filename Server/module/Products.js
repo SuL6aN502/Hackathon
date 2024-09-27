@@ -9,9 +9,10 @@ const productShema = new mongoose.Schema({
     expirationDate:Date,
     Stock:Number,
     Category:String,
-    CreatedAt: { type: Date, default: Date.now }
-})
+    CreatedAt:Date
+});
 
 const Product =  mongoose.model("Product", productShema);
+
 
 module.exports = Product;
