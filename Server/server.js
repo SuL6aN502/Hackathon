@@ -21,10 +21,11 @@ app.get("/product", async (req, res) => {
 
 // view One Product
 
-// app.get("/product", async (req, res) => {
-//   const Products = await Product.find();
-//   res.json({ Products: Products });
-// });
+app.get("/product/:id", async (req, res) => {
+  const productId = req.params.id;
+  const Products = await Product.findById(productId);
+  res.json({ Products: Products });
+});
 
 // create Product
 
@@ -42,10 +43,12 @@ app.post("/product", (req, res) => {
   res.json({ product: product });
 });
 
+// update one
+
 app.put("/product/:id", async (req, res) => {
   const productId = req.params.id;
-  const product = await Product.findByIdAndUpdate(productId ,
-   {
+  
+  const product = await Product.findByIdAndUpdate(productId, {
     Name: req.body.Name,
     Description: req.body.Description,
     Barcode: req.body.Barcode,
@@ -57,13 +60,20 @@ app.put("/product/:id", async (req, res) => {
   });
   res.json({ product: product });
 });
+// update many
+
+// 
+
+// 
+
+
+
+// delete one
 
 app.delete("/product/:id", async (req, res) => {
   const productId = req.params.id;
-  const note = await Product.deleteOne(productId);
+  const note = await Product.findByIdAndDelete(productId);
   res.json({ success: "its was deleted" });
 });
-
-
 
 app.listen(process.env.PORT);
