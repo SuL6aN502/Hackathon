@@ -1,10 +1,12 @@
 const mongoose = require("mongoose");
 
+// requireds Name , Des , Barcode , price , Stock , Category 
+// optional expirationDate , CreatedAt 
 const productSchema = new mongoose.Schema({
   Name: { type: String, required: true },
-  Description: String,
-  Barcode: { type: String, unique: true },
-  Price: Number,
+  Description: { type: String, required: true },
+  Barcode: { type: String, unique: true, required: true },
+  Price: { type: Number, required: true },
   Stock: {
     type: Number,
     default: 0,
@@ -17,10 +19,10 @@ const productSchema = new mongoose.Schema({
       message: "القيمة يجب أن تكون 0 أو أكبر",
     },
   },
-  reorderLevel: { type: Number, default: 10 },
-  Category: String,
-  expirationDate: Date,
+  Category: { type: String, required: true },
+  expirationDate: { type: Date },
   CreatedAt: { type: Date, default: Date.now },
 });
 
+// Export the model
 module.exports = mongoose.model("Product", productSchema);
