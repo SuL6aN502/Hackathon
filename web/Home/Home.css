@@ -1,0 +1,248 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Cairo', sans-serif;
+    background-color: #ffffff;
+}
+
+/* Body */
+body {
+    background-color: #f0f4f8;
+    color: #333;
+    direction: rtl;
+    text-align: right;
+}
+.logo{
+    padding-left: 3%;
+}
+header{
+   width: 100%; 
+   height: 11vh;
+   border-color: #222;
+   display: flex;
+   flex-direction: row-reverse;
+   justify-content: space-between;
+   padding: 5px 10px;
+   padding-right: 4%;
+   padding-top: 3%;
+
+}
+header nav{
+    width: 572px;
+    height: 60px;
+    background-image: linear-gradient(270deg,#4a9ad39e,transparent);
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}nav ul{
+    list-style: none;
+    display: flex;
+} 
+
+nav li{
+    margin: 0 15px;
+}
+
+nav a{
+    text-decoration: none;
+    color: #333;
+    font-weight: 700;
+}
+li:nth-child(1){
+    background: rgba(255, 255, 255, 0.795);
+    padding: 5px 15px;
+    border-radius: 30px;
+}
+
+.text{
+    text-align: right; /* محاذاة النص إلى اليمين */
+    margin: 100px 50px; /* مسافة من الحواف لتوسيط المحتوى */
+}
+.text h2{
+    font-size: 48px; /* حجم العنوان ليكون مشابهًا لحجم العنوان في الصورة */
+    font-weight: bold; /* جعل الخط عريضًا */
+    color: #3b007f; /* لون النص ليكون قريبًا من اللون المستخدم */
+    margin-bottom: 20px; /* مسافة تحت العنوان */
+}
+.text p{
+    font-size: 24px; /* حجم الفقرة ليكون مشابهًا لما هو موجود في الصورة */
+    color: #333; /* لون الفقرة */
+    line-height: 1.8; /* تباعد الأسطر لتحسين القراءة */
+    max-width: 80%;
+}
+.container {
+    display: flex;
+    align-items: center; /* Aligns items vertically */
+    justify-content: space-between; /* Adjusts the space between elements if needed */
+    padding-top: 2vh;
+    
+}
+
+.circle1 {
+    width: 888px; /* Adjust the size as needed */
+    height: 566px; /* Adjust the size as needed */
+    /* background: linear-gradient(to bottom, #4A99D3, #264F6D); Color gradient */
+    /* border-radius: 50%;  */
+    margin-left: -10%; 
+    margin-top: 10vh;
+}
+
+
+
+
+/* Features Section */
+.features {
+    background-color: #fff;
+    padding: 60px 0;
+}
+
+.features h2 {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 40px;
+}
+
+.feature-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    text-align: center;
+}
+
+.feature-item {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    max-width: 30%;
+}
+
+.feature-item img {
+    width: 60px;
+    margin-bottom: 15px;
+}
+
+/* Additional Info Section */
+.additional-info {
+    background-color: #e0e7ff;
+    padding: 60px 0;
+    text-align: center;
+}
+
+.info-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.info-item {
+    background-color: #d1e0ff;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Footer */
+.footer-container{
+max-width: 1170px;
+margin: auto;
+}
+.footer-col ul{
+list-style: none;
+}
+.row{
+    display: flex;
+    flex-wrap: wrap;
+}
+.footer {
+    background-color: #3498db; /* لون الخلفية */
+    color: #fff;
+    padding: 70px 0;
+    text-align: right;
+    font-family: Arial, sans-serif;
+}
+.footer-col{
+width: 25%;
+padding: 0 15px;
+}
+.footer-col h4{
+    font-size: 18;
+    color: #ffffff;
+    text-transform: capitalize;
+    margin-bottom: 30px;
+    font-weight: 500px;
+    position: relative;
+}
+.footer-col h4::before{
+    content: '';
+    position: absolute;
+    right:0;
+    background-color: #ffffff;
+    bottom: -10px;
+    height: 2px;
+    box-sizing: border-box;
+    width: 50px;
+}
+.footer-col ul li:not(:last-child){
+margin-bottom: 10px;
+}
+.footer-col ul li a{
+    font-size: 16px;
+    text-transform: capitalize;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 300;
+    color: #bbbbbb;
+    display: block;
+    transition: all 0.3s ease;
+}
+.footer-col ul li a:hover{
+    color: #ffffff;
+    padding-right: 8px;
+}
+.newsletter .subscribe {
+    display: flex;
+    margin-top: 15px;
+}
+
+.newsletter input[type="email"] {
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    width: 70%;
+    margin-left: 5px;
+}
+
+.newsletter button {
+    padding: 10px;
+    border: none;
+    background-color: #2980b9;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.footer-bottom {
+    background-color: #2980b9;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+}
+
+.footer-bottom p {
+    margin: 0;
+}
+
+.social-media {
+    margin-top: 10px;
+}
+
+.social-media a {
+    color: #fff;
+    margin: 0 10px;
+    text-decoration: none;
+    font-size: 20px;
+}
