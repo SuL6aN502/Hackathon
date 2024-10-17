@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number]{
+    -moz-appearance: textfield;
+}
+header{
+    height: 11svh;
+}
+body{
+    background: #F4F4F4;
+    height: 100svh;
+    display: flex;
+    flex-direction: column;
+}
+
+#root{
+    height: 100%;
+}
+
+input:focus{
+    outline: #D1D5DB;
+}
+main > section{
+    height: 89svh;
+}
+
+.custom-Color{
+    color: #0FC0EA;
+}.custom-Color2{
+    color: #0C085C;
+}
+.custom-Color3{
+    color: #C6E9F2;
+}
+.custom-Color4{
+    background-color: #C6E9F2;
+}
+.gradient{
+    background: linear-gradient(120deg ,#264F6C ,#4A99D2);
+}
+ol{
+    direction: rtl;
+}
+main > section > ul li:nth-child(odd){
+    background-color: #C6E9F2;
+}
+main > section > ul li:nth-child(even){
+    background-color: white;
+    color: #0C085C;
+}
