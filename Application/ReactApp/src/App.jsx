@@ -5,11 +5,13 @@ import useProductStore from "./store/store";
 import contact from "./assets/Iqons/contact.png";
 import profile from "./assets/Iqons/profile.png";
 import "./index.css";
+import Swal from "sweetalert2";
 
 export default function App() {
   const [quantities, setQuantities] = useState({}); // State for quantities of each product
   const [totalPrice, setTotalPrice] = useState(0); // State for total price
-  const { fetchData, selectedProducts, removeProductFromSelected } = useProductStore();
+  const { fetchData, selectedProducts, removeProductFromSelected } =
+    useProductStore();
 
   useEffect(() => {
     fetchData();
@@ -18,7 +20,7 @@ export default function App() {
   // Function to update quantity for a specific product
   const updateQuantity = (productId, num, price) => {
     setQuantities((prevQuantities) => {
-      const currentQuantity = prevQuantities[productId] || 0; // Get current quantity or default to 0
+      const currentQuantity = prevQuantities[productId] || 1; // Get current quantity or default to 0
       const newQuantity = currentQuantity + num;
 
       if (newQuantity < 0) return prevQuantities; // Prevent negative quantity
@@ -30,18 +32,32 @@ export default function App() {
   };
 
   // Function to calculate total price based on quantities
-  const calculateTotalPrice = (quantities) => {
-    const newTotalPrice = selectedProducts.reduce((total, product) => {
-      const quantity = quantities[product._id] || 0; // Get quantity for the product
-      return total + product.Price * quantity; // Calculate total price
-    }, 0);
-    setTotalPrice(newTotalPrice);
-  };
+  useEffect(() => {
+    const calculateTotalPrice = (quantities) => {
+      const newTotalPrice = selectedProducts.reduce((total, product) => {
+        const quantity = quantities[product._id] || 0; // Get quantity for the product
+        return total + product.Price * quantity; // Calculate total price
+      }, 0);
+      setTotalPrice(newTotalPrice);
+    };
+  }, []);
 
+  const Save = () => {
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "تم الحفظ بنجاح",
+      showConfirmButton: false,
+      timer: 1000,
+    });
+    setselectedProducts([]);
+  };
   // Modified removeProductFromSelected function
   const handleRemoveProduct = (productId) => {
     const { selectedProducts } = useProductStore.getState(); // Get current state
-    const productToRemove = selectedProducts.find((product) => product._id === productId);
+    const productToRemove = selectedProducts.find(
+      (product) => product._id === productId
+    );
 
     // Remove the product
     removeProductFromSelected(productId);
@@ -141,11 +157,15 @@ export default function App() {
                 <p className="w-1/4 text-center">{product.Price}</p>
                 <hr className="border-2 border-gray-400 rounded-lg h-14" />
                 <p className="w-1/4 text-center">{product.Barcode}</p>
-                <p className="absolute right-20">{quantities[product._id] || 0}</p>
+                <p className="absolute right-20">
+                  {quantities[product._id] || 0}
+                </p>
                 <div className="w-10 h-10 absolute flex justify-center flex-col right-8">
                   <button
                     className="costom-color3 right-5 transition-all"
-                    onClick={() => updateQuantity(product._id, 1, product.Price)}
+                    onClick={() =>
+                      updateQuantity(product._id, 1, product.Price)
+                    }
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -164,7 +184,9 @@ export default function App() {
                   </button>
                   <button
                     className="costom-color3 right-5 transition-all"
-                    onClick={() => updateQuantity(product._id, -1, product.Price)}
+                    onClick={() =>
+                      updateQuantity(product._id, -1, product.Price)
+                    }
                   >
                     <svg
                       className="rotate-180"
@@ -206,14 +228,43 @@ export default function App() {
         </section>
         <section className="w-1/6 bg-white flex flex-col justify-between items-center pt-10 border-t-2 ">
           <h3 className="custom-Color2 text-2xl">الفاتورة</h3>
-          <div className="custom-Color4 w-full h-60 flex flex-col items-center justify-between py-6">
-            <h3 className="w-full px-10 text-right text-2xl">المجموع: {totalPrice} ﷼</h3>
-            <p className="w-full px-10 text-right text-2xl">الضريبة</p>
+          <div className="custom-Color4 w-full h-72 flex flex-col items-center justify-between py-6 ">
+            <p className="w-full px-10 text-right text-1xl">
+              السعر : {(totalPrice * 0.85).toFixed(3)} ﷼
+            </p>
+            <p className="w-full px-10 text-right text-1xl">
+              الضريبة: {(totalPrice.toFixed(4) * 0.15).toFixed(3)} ﷼
+            </p>
+            <h3 className="w-full px-10 text-right text-2xl">
+              المجموع: {totalPrice.toFixed(2)} ﷼
+            </h3>
             <div className="w-5/6 h-20 flex justify-evenly gradient rounded-2xl items-center">
-              <button className="w-28 h-1/2 rounded-lg flex justify-center items-center bg-white">
+              <button
+                className="w-28 h-1/2 rounded-lg flex justify-center items-center bg-white"
+                onClick={Save}
+              >
                 حفظ الفاتورة
-                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" strokeLinejoin="round" strokeWidth={4}><path d="M6 9a3 3 0 0 1 3-3h21.336a3 3 0 0 1 2.122.879l3.858 3.858l4.805 4.805A3 3 0 0 1 42 17.664V39a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3z"></path><path d="M31 26H17a3 3 0 0 0-3 3v13h20V29a3 3 0 0 0-3-3Z"></path><path strokeLinecap="round" d="M29 16H17a3 3 0 0 1-3-3V6"></path></g></svg>
-                </button>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="1em"
+                  height="1em"
+                  viewBox="0 0 48 48"
+                >
+                  <g
+                    fill="none"
+                    stroke="currentColor"
+                    strokeLinejoin="round"
+                    strokeWidth={4}
+                  >
+                    <path d="M6 9a3 3 0 0 1 3-3h21.336a3 3 0 0 1 2.122.879l3.858 3.858l4.805 4.805A3 3 0 0 1 42 17.664V39a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3z"></path>
+                    <path d="M31 26H17a3 3 0 0 0-3 3v13h20V29a3 3 0 0 0-3-3Z"></path>
+                    <path
+                      strokeLinecap="round"
+                      d="M29 16H17a3 3 0 0 1-3-3V6"
+                    ></path>
+                  </g>
+                </svg>
+              </button>
               <button className="w-28 h-1/2 rounded-lg flex justify-center items-center bg-white">
                 طباعة الفاتورة
                 <svg
